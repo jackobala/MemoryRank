@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Jogo da Memória</h2>
+        <div class="game"></div>
+        <button class="reset" onclick="iniciarJogo();">Start</button>
+        <div class="stats">
+            <div class="jogadas">Jogadas: 0</div>
+            <div class="tempo">Tempo: 0 seg</div>
+        </div>
+    </div>
+    <script>
+        let cards = ["1", "1", "2", "2", "3", "3", "4", "4", "5", "5", "6", "6"];
+        let shuf_cards = cards.sort(() => (Math.random() > .5) ? 2 : -1);
+        let contadorJogadas = 0;
+        let tempoInicio;
+        let tempoDecorrido;
+        let timerInterval;
+
+        function iniciarJogo() {
+            
+            document.querySelector('.game').innerHTML = '';
+            
+            
+            contadorJogadas = 0;
+            tempoInicio = new Date().getTime();
+            clearInterval(timerInterval);
+            atualizarTempo();
+            
+            
+            for (let i = 0; i < cards.length; i++) {
+                let box = document.createElement('div');
+                box.className = 'item';
+                box.innerHTML = shuf_cards[i];
+
+                box.onclick = function() {
+                    virarCarta(this);
+                };
+
+                document.querySelector('.game').appendChild(box);
+            }
+        }
+
+        function virarCarta(carta) {
+            carta.classList.add('boxOpen');
+
+            setTimeout(function() {
+                if (document.querySelectorAll('.boxOpen').length > 1) {
+                    if (document.querySelectorAll('.boxOpen')[0].innerHTML ==
+                        document.querySelectorAll('.boxOpen')[1].innerHTML) {
+                        document.querySelectorAll('.boxOpen')[0].classList.add('boxMatch');
+                        document.querySelectorAll('.boxOpen')[1].classList.add('boxMatch');
+
+                        document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen');
+                        document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen');
+
+                        if (document.querySelectorAll('.boxMatch').length == cards.length) {
+                            clearInterval(timerInterval);
+                            alert('Você venceu! Tempo: ' + tempoDecorrido + ' segundos, Jogadas: ' + contadorJogadas);
+                        }
+                    } else {
+                        document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen');
+                        document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen');
+                    }
+
+                    
+                    contadorJogadas++;
+                    document.querySelector('.jogadas').innerHTML = `Jogadas: ${contadorJogadas}`;
+                }
+            }, 500);
+        }
+
+        function atualizarTempo() {
+            timerInterval = setInterval(function() {
+                const agora = new Date().getTime();
+                tempoDecorrido = Math.floor((agora - tempoInicio) / 1000); // Tempo em segundos
+
+                
+                document.querySelector('.tempo').innerHTML = `Tempo: ${tempoDecorrido} segundos`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
