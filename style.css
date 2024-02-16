@@ -4,6 +4,8 @@
     box-sizing: border-box;
     font-family: "Unbounded", sans-serif;
     font-weight: bolder;
+    font-size: 70%;
+    align-items: center;
 }
 
 body {
@@ -78,7 +80,7 @@ h2 {
 }
 
 .item {
-    position: relative;
+    position:relative;
     width: 100px;
     height: 100px;
     display: flex;
