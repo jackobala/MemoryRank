@@ -37,6 +37,11 @@ h2 {
 
 }
 
+h3 {
+  font-size: 50%;
+  color: antiquewhite;
+}
+
 .reset {
     padding: 15px 20px;
     border: none;
