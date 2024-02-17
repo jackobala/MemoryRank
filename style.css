@@ -26,6 +26,7 @@ body {
     background-color: rgba(37, 37, 37, 0.445);
     padding: auto;
     border-radius: 30px;
+    height: 100vh;
 }
 
 h2 {
