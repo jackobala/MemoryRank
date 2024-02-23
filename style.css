@@ -22,9 +22,9 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
     background-color: rgba(37, 37, 37, 0.445);
-    padding: auto;
+    padding-top: 10px;
     border-radius: 30px;
     height: 100%;
 }
@@ -162,3 +162,18 @@ input {
     }
   }
   
+  #rankingTable {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+#rankingTable th, #rankingTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#rankingTable th {
+    background-color: #f2f2f2;
+}

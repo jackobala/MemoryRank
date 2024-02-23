@@ -17,6 +17,19 @@
         <div class="game"></div>
         <input type="text" id="apelido" placeholder="Insira seu apelido" />
         <button id="startButton" class="reset" onclick="iniciarJogo();">Start</button>
+        <button id="btnObterRanking" onclick="obterRanking()">Ranking</button>
+        <table id="rankingTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Apelido</th>
+                    <th>Tempo (segundos)</th>
+                    <th>Jogadas</th>
+                </tr>
+            </thead>
+            <tbody id="rankingBody">
+                <!-- As linhas da tabela serão adicionadas dinamicamente aqui -->
+            </tbody>
+        </table>
         <div class="stats">
             <div class="jogadas">Jogadas: 0</div>
             <div class="tempo">Tempo: 0 </div>
@@ -104,6 +117,35 @@
                 document.querySelector('.tempo').innerHTML = `Tempo: ${tempoDecorrido}`;
             }, 1000);
         }
+        function obterRanking() {
+            fetch('http://localhost:3000/ranking') // Atualize a URL conforme necessário
+                .then(response => response.json())
+                .then(data => {
+                    // Manipule os dados do ranking aqui
+                    console.log(data);
+
+                    // Exemplo: Mostrar os dados na tabela
+                    const rankingBody = document.getElementById('rankingBody');
+
+                    // Limpar a tabela antes de atualizar
+                    rankingBody.innerHTML = '';
+
+                    // Adicionar as linhas à tabela
+                    data.forEach(item => {
+                        const row = rankingBody.insertRow();
+                        row.insertCell(0).textContent = item.apelido;
+                        row.insertCell(1).textContent = item.tempo;
+                        row.insertCell(2).textContent = item.jogadas;
+                    });
+
+                    // Exibir a tabela
+                    const rankingTable = document.getElementById('rankingTable');
+                    rankingTable.style.display = 'table';
+                })
+                .catch(error => {
+                    console.error('Erro ao obter o ranking:', error);
+                });
+            }
     </script>
 </body>
 </html>
