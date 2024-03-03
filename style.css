@@ -51,7 +51,7 @@ h3 {
     transition: 0.2s;
     transition-timing-function: linear;
     position: relative;
-    left: 34%;
+    left: 37%;
 }   
 
 .reset:active {
@@ -134,7 +134,9 @@ input {
     outline: none;
     color: white;
     font-weight: bolder;
-    margin-left: 30px;
+    position: relative;
+    left: 20%;
+    margin-bottom: 30px;
   }
   
   input:focus {
