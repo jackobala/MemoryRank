@@ -14,27 +14,43 @@
     <div class="container">
         <h2>Memory Rank</h2>
         <h3> by @Jacksdev</h3>
-        <div class="game"></div>
-        <input type="text" id="apelido" placeholder="Insira seu apelido" />
-        <button id="startButton" class="reset" onclick="iniciarJogo();">Start</button>
-        <button id="btnObterRanking" onclick="obterRanking()">Ranking</button>
-        <table id="rankingTable" style="display: none;">
-            <thead>
-                <tr>
-                    <th>Apelido</th>
-                    <th>Tempo (segundos)</th>
-                    <th>Jogadas</th>
-                </tr>
-            </thead>
-            <tbody id="rankingBody">
-                <!-- As linhas da tabela serão adicionadas dinamicamente aqui -->
-            </tbody>
-        </table>
-        <div class="stats">
-            <div class="jogadas">Jogadas: 0</div>
-            <div class="tempo">Tempo: 0 </div>
+
+        <!-- Jogo Tab -->
+        <div id="Jogo" class="tabcontent">
+            <div class="game"></div>
+            <input type="text" id="apelido" placeholder="Insira seu apelido" />
+            <button id="startButton" class="reset" onclick="iniciarJogo();">Start</button>
+            <div class="stats">
+                <div class="jogadas">Jogadas: 0</div>
+                <div class="tempo">Tempo: 0 </div>
+            </div>
+        </div>
+    
+
+        <!-- Ranking Tab -->
+        <div id="Ranking" class="tabcontent" style="display: none;">
+            <table id="rankingTable">
+                <thead>
+                    <tr>
+                        <th>Apelido</th>
+                        <th>Tempo (segundos)</th>
+                        <th>Jogadas</th>
+                    </tr>
+                </thead>
+                <tbody id="rankingBody">
+                    <!-- As linhas da tabela serão adicionadas dinamicamente aqui -->
+                </tbody>
+            </table>
         </div>
     </div>
+        
+        <div class="tabs-container">
+        <!-- Adicione os botões de aba aqui -->
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Jogo')">🕹️<br> Game</button>
+            <button class="tablinks" onclick="openTab(event, 'Ranking')">🥇<br> Rank</button>
+        </div>
+        </div>
     <script>
         let cards = ["1", "1", "2", "2", "3", "3", "4", "4", "5", "5", "6", "6"];
         let contadorJogadas = 0;
@@ -97,6 +113,32 @@
                         if (document.querySelectorAll('.boxMatch').length == cards.length) {
                             clearInterval(timerInterval);
                             alert('Você venceu, '  +  apelido + '! Tempo: ' + tempoDecorrido + ' segundos, Jogadas: ' + contadorJogadas);
+
+                            function atualizarRankingEmTempoReal() {
+                                const dadosJogador = {
+                                apelido: apelido,
+                                tempo: tempoDecorrido,
+                                jogadas: contadorJogadas,
+    };
+
+                            //requisição POST para o servidor
+                        fetch('/atualizar-ranking-em-tempo-real', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+        },
+                        body: JSON.stringify(dadosJogador),
+    })
+                        .then(response => response.json())
+                        .then(data => {
+        
+                        console.log('Ranking atualizado:', data);
+    })
+                       .catch(error => {
+                       console.error('Erro ao atualizar o ranking em tempo real:', error);
+    });
+}
+
                         }
                     } else {
                         document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen');
@@ -118,13 +160,13 @@
             }, 1000);
         }
         function obterRanking() {
-            fetch('http://localhost:3000/ranking') // Atualize a URL conforme necessário
+            fetch('http://localhost:3000/ranking') 
                 .then(response => response.json())
                 .then(data => {
-                    // Manipule os dados do ranking aqui
+                    // dados do ranking 
                     console.log(data);
 
-                    // Exemplo: Mostrar os dados na tabela
+                    // Mostrar os dados na tabela
                     const rankingBody = document.getElementById('rankingBody');
 
                     // Limpar a tabela antes de atualizar
@@ -146,6 +188,25 @@
                     console.error('Erro ao obter o ranking:', error);
                 });
             }
+        
+
+function openTab(evt, tabName) {
+    const tabContents = document.getElementsByClassName('tabcontent');
+    for (const tabContent of tabContents) {
+        tabContent.style.display = 'none';
+    }
+
+    const tabLinks = document.getElementsByClassName('tablinks');
+    for (const tabLink of tabLinks) {
+        tabLink.className = tabLink.className.replace(' active', '');
+    }
+
+    document.getElementById(tabName).style.display = 'block';
+    evt.currentTarget.className += ' active';
+}
+
+openTab(null, 'Jogo');
+
     </script>
 </body>
 </html>

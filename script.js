@@ -31,3 +31,21 @@ app.get('/ranking', (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
+// Rota para atualizar o ranking em tempo real
+app.post('/atualizar-ranking-em-tempo-real', (req, res) => {
+    const { apelido, tempo, jogadas } = req.body;
+
+    // Lógica para inserir ou atualizar os dados do jogador vencedor no banco de dados
+    db.run(
+        'INSERT INTO ranking (apelido, tempo, jogadas) VALUES (?, ?, ?) ON CONFLICT(apelido) DO UPDATE SET tempo = MIN(?, tempo), jogadas = MIN(?, jogadas)',
+        [apelido, tempo, jogadas, tempo, jogadas],
+        (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Erro ao atualizar o ranking em tempo real' });
+            } else {
+                res.json({ success: true });
+            }
+        }
+    );
+});
