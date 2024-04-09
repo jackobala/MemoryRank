@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Memory Rank</h2>
+        <h3> by @Jacksdev</h3>
+
+        <!-- Jogo Tab -->
+        <div id="Jogo" class="tabcontent">
+            <div class="game"></div>
+            <input type="text" id="apelido" placeholder="Insira seu apelido" />
+            <button id="startButton" class="reset" onclick="iniciarJogo();">Start</button>
+            <div class="stats">
+                <div class="jogadas">Jogadas: 0</div>
+                <div class="tempo">Tempo: 0 </div>
+            </div>
+        </div>
+    
+
+        <!-- Ranking Tab -->
+        <div id="Ranking" class="tabcontent" style="display: none;">
+            <table id="rankingTable">
+                <thead>
+                    <tr>
+                        <th>Apelido</th>
+                        <th>Tempo (segundos)</th>
+                        <th>Jogadas</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-ranking">
+                    <!-- As linhas da tabela serão adicionadas dinamicamente aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+        <div class="tabs-container">
+        
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Jogo')">🕹️<br> Game</button>
+            <button id="btnObterRanking" class="tablinks" onclick="openTab(event, 'Ranking')">🥇<br> Rank</button>
+        </div>
+        </div>
+</body>
+<script src="ranking.js"></script>
+</html>
