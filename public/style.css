@@ -50,9 +50,8 @@ h3 {
     transform: translate(0, -3x);
     transition: 0.2s;
     transition-timing-function: linear;
-    position: absolute;
-    top: 65%;
-    left: 37%;
+    position: relative;
+    left: 34%;
   }   
 
 .reset:active {
@@ -81,9 +80,9 @@ h3 {
     color: rgb(248, 204, 154);
     font-size: 80%;
     font-weight: bold;
-    padding: 10px;
+    padding: 10%;
     text-align: center;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .item {
