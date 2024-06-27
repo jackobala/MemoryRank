@@ -28,7 +28,6 @@ app.post('/submit-score', (req, res) => {
         }
 
         if (row.count < 5) {
-            // Menos de 5 scores, insere diretamente
             const insertQuery = `INSERT INTO scores (apelido, tempo, jogadas) VALUES (?, ?, ?)`;
             db.run(insertQuery, [apelido, tempo, jogadas], function(err) {
                 if (err) {
@@ -38,7 +37,6 @@ app.post('/submit-score', (req, res) => {
                 res.status(200).send('Score submitted');
             });
         } else {
-            // Exatamente 5 scores, verifica se o novo score é melhor que o pior existente
             const worstQuery = `SELECT * FROM scores ORDER BY tempo DESC, jogadas DESC LIMIT 1`;
             db.get(worstQuery, [], (err, worstScore) => {
                 if (err) {
@@ -47,7 +45,6 @@ app.post('/submit-score', (req, res) => {
                 }
 
                 if (tempo < worstScore.tempo || (tempo === worstScore.tempo && jogadas < worstScore.jogadas)) {
-                    // O novo score é melhor que o pior existente, substitui o pior score
                     const deleteQuery = `DELETE FROM scores WHERE id = ?`;
                     db.run(deleteQuery, [worstScore.id], function(err) {
                         if (err) {
@@ -65,7 +62,6 @@ app.post('/submit-score', (req, res) => {
                         });
                     });
                 } else {
-                    // O novo score não é melhor, não faz nada
                     res.status(200).send('Score not high enough to enter leaderboard');
                 }
             });
