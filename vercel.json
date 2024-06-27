@@ -14,14 +14,14 @@
       "use": "@vercel/static"
     },
     {
-      "src": "styles/**",
+      "src": "ranking.js",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/server.js" },
-    { "src": "/styles/(.*)", "dest": "/styles/$1" },
     { "src": "/style.css", "dest": "/style.css" },
+    { "src": "/ranking.js", "dest": "/ranking.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
