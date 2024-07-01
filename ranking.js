@@ -1,5 +1,3 @@
-const API_URL = process.env.API_URL || 'http://localhost:3000';
-
 let cards = ["1", "1", "2", "2", "3", "3", "4", "4", "5", "5", "6", "6"];
 let contadorJogadas = 0;
 let tempoInicio;
@@ -85,7 +83,7 @@ function atualizarTempo() {
 }
 
 function enviarScore(apelido, tempo, jogadas) {
-    fetch(`${API_URL}/submit-score`, {
+    fetch('http://localhost:3000/submit-score', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -102,7 +100,7 @@ function enviarScore(apelido, tempo, jogadas) {
 }
 
 function obterRanking() {
-    fetch(`${API_URL}/leaderboard`)
+    fetch('http://localhost:3000/leaderboard')
     .then(response => response.json())
     .then(data => {
         console.log("Dados do ranking recebidos:", data); 
