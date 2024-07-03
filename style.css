@@ -4,16 +4,17 @@
   font-family: "Unbounded", sans-serif;
   font-weight: bolder;
   box-sizing: border-box;
+  
 }
 
 body {
+ 
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: black;
+  align-items: center;   
+  background-color:black;
   margin-top: 100px;
 }
-
 .container {
   display: flex;
   align-items: center;
@@ -22,21 +23,20 @@ body {
   padding-top: 10px;
   border-radius: 30px;
   position: relative;
-  width: 90%;
-  max-width: 500px;
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 100%;
   padding-top: 16px;
   color: azure;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+
 }
 
 h3 {
-  font-size: 0.75em;
-  color: antiquewhite;
+font-size: 50%;
+color: antiquewhite;
 }
 
 .reset-container {
@@ -68,22 +68,29 @@ h3 {
   background: #2b0c66;
 }
 
-.game {
-  width: 90%;
-  max-width: 420px;
-  height: 420px;
+.game-container {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  gap: 15px;
-  transform-style: preserve-3d;
-  perspective: 500px;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.game {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(4, 0.3fr);
+  gap: 10px;
+  width: 420px;
+  height: 420px;
+  transform: scale(1);
+  
 }
 
 .stats {
   color: rgb(248, 204, 154);
-  font-size: 0.8em;
+  font-size: 80%;
   font-weight: bold;
   padding: 10%;
   text-align: center;
@@ -91,7 +98,6 @@ h3 {
 }
 
 .item {
-  position: relative;
   width: 75px;
   height: 75px;
   display: flex;
@@ -103,8 +109,8 @@ h3 {
   font-weight: bold;
   transform: rotateY(180deg);
   transition: 0.25s;
+  padding: 46%;
 }
-
 .item.boxOpen {
   transform: rotateY(0deg);
 }
@@ -117,11 +123,13 @@ h3 {
   transition: 0.25s;
   transform: rotateY(0deg);
   backface-visibility: hidden;
+
 }
 
 .boxOpen::after,
 .boxMatch::after {
   transform: rotateY(180deg);
+
 }
 
 .boxMatch {
@@ -138,6 +146,7 @@ input {
   color: white;
   font-weight: bolder;
   position: relative;
+  left: 20%;
   margin-bottom: 30px;
 }
 
@@ -147,34 +156,36 @@ input:focus {
 
 @keyframes rotateShadow {
   0% {
-      box-shadow: -2px -2px 0px 0px #ff8800, 2px 2px 0px 0px #ff1e00;
+    box-shadow: -2px -2px 0px 0px #ff8800, 2px 2px 0px 0px #ff1e00;
   }
   25% {
-      box-shadow: -2px 2px 0px 0px #ff8800, 2px -2px 0px 0px #ff7b00;
+    box-shadow: -2px 2px 0px 0px #ff8800, 2px -2px 0px 0px #ff7b00;
   }
   50% {
-      box-shadow: 2px 2px 0px 0px #ff8800, -2px -2px 0px 0px #ff3300;
+    box-shadow: 2px 2px 0px 0px #ff8800, -2px -2px 0px 0px #ff3300;
   }
   75% {
-      box-shadow: 2px -2px 0px 0px #ff0000, -2px 2px 0px 0px #ffae00;
+    box-shadow: 2px -2px 0px 0px #ff0000, -2px 2px 0px 0px #ffae00;
   }
   100% {
-      box-shadow: -2px -2px 0px 0px #ff0000, 2px 2px 0px 0px #ffa600;
+    box-shadow: -2px -2px 0px 0px #ff0000, 2px 2px 0px 0px #ffa600;
   }
 }
 
 #rankingTable {
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  max-height: 100%;
+  margin-top:20px;
+  margin-bottom: 400px;
   border-collapse: collapse;
-  overflow-y: auto;
+  overflow-y: auto; 
 }
 
 #rankingTable th, #rankingTable td {
   border: 1px solid #dddddd2d;
   padding: 8px;
   text-align: left;
+  
 }
 
 #rankingTable th {
@@ -183,64 +194,62 @@ input:focus {
 }
 
 tr {
-  color: #ccc;
+color: #ccc;
 }
 
 .tab {
-  overflow: hidden;
+overflow: hidden;
 }
 
 .tab button {
-  background-color: inherit;
-  border: none;
-  cursor: pointer;
-  padding: 8px 15px;
-  transition: 0.3s;
-  font-size: 0.9em;
-  background-color: rgb(37, 37, 37);
-  border-radius: 3%;
-  color: #ccc;
+background-color: inherit;
+border: none;
+cursor: pointer;
+padding: 8px 15px;
+transition: 0.3s;
+font-size: 15.9px;
+background-color: rgb(37, 37, 37);
+border-radius: 3%;
+color: #ccc;
 }
 
 .tab button:hover {
-  background-color: #4b4b4b;
+background-color: #4b4b4b;
 }
 
 .tab button.active {
-  background-color: rgba(37, 37, 37, 0.568);
+background-color: rgba(37, 37, 37, 0.568);
 }
-
 .tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border-top: none;
+display: none;
+padding: 6px 12px;
+border-top: none;
 }
 
 .tabs-container {
-  position: absolute;
-  top: 5%;
+position: absolute;
+top: 5%
+  
 }
 
 @media (max-width: 600px) {
+  .container {
+      padding: 10px; /* Ajuste o padding conforme necessário */
+      min-width: 350px;
+  }
+
   .game {
-      width: 100%;
-      height: auto;
-      gap: 10px;
+      transform: scale(0.8); /* Ajuste a escala conforme necessário */
   }
 
   .item {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       font-size: 2em;
   }
 
-  .reset {
-      left: 0;
+  .reset, input {
       width: 100%;
-  }
-
-  input {
-      left: 0;
-      width: 100%;
+      max-width: 300px;
   }
 }
