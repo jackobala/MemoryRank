@@ -82,8 +82,10 @@ function atualizarTempo() {
     }, 1000);
 }
 
+const API_URL = 'https://api-memory-rank.vercel.app/api';
+
 function enviarScore(apelido, tempo, jogadas) {
-    fetch('http://localhost:3000/submit-score', {
+    fetch(`${API_URL}/submit-score`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -93,6 +95,7 @@ function enviarScore(apelido, tempo, jogadas) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
+        obterRanking();
     })
     .catch(error => {
         console.error('Error:', error);
@@ -100,10 +103,10 @@ function enviarScore(apelido, tempo, jogadas) {
 }
 
 function obterRanking() {
-    fetch('http://localhost:3000/leaderboard')
+    fetch(`${API_URL}/leaderboard`)
     .then(response => response.json())
     .then(data => {
-        console.log("Dados do ranking recebidos:", data); 
+        console.log("Dados do ranking recebidos:", data);
 
         const tabelaRanking = document.getElementById('tabela-ranking');
         tabelaRanking.innerHTML = '';
@@ -132,6 +135,7 @@ function obterRanking() {
         console.error('Error:', error);
     });
 }
+
 
 function openTab(evt, tabName) {
     const tabContents = document.getElementsByClassName('tabcontent');
