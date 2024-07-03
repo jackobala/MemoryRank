@@ -247,9 +247,4 @@ top: 5%
       height: 70px;
       font-size: 2em;
   }
-
-  .reset, input {
-      width: 100%;
-      max-width: 300px;
-  }
 }
