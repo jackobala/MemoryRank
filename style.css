@@ -108,11 +108,13 @@ color: antiquewhite;
   color: aliceblue;
   font-weight: bold;
   transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
   transition: 0.25s;
   padding: 46%;
 }
 .item.boxOpen {
   transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
 }
 
 .item::after {
@@ -122,6 +124,7 @@ color: antiquewhite;
   background: linear-gradient(293deg, rgb(241, 147, 4) 0%, rgba(243, 62, 8, 0.986) 100%);
   transition: 0.25s;
   transform: rotateY(0deg);
+  -moz-transform: rotate(0deg);
   backface-visibility: hidden;
 
 }
@@ -129,6 +132,7 @@ color: antiquewhite;
 .boxOpen::after,
 .boxMatch::after {
   transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 
 }
 
@@ -234,12 +238,12 @@ top: 5%
 
 @media (max-width: 600px) {
   .container {
-      padding: 10px; /* Ajuste o padding conforme necessário */
+      padding: 10px;  
       min-width: 350px;
   }
 
   .game {
-      transform: scale(0.8); /* Ajuste a escala conforme necessário */
+      transform: scale(0.8); 
   }
 
   .item {
