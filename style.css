@@ -123,8 +123,6 @@ color: antiquewhite;
   inset: 0;
   background: linear-gradient(293deg, rgb(241, 147, 4) 0%, rgba(243, 62, 8, 0.986) 100%);
   transition: 0.25s;
-  transform: rotateY(0deg);
-  -moz-transform: rotate(0deg);
   backface-visibility: hidden;
 
 }
@@ -132,8 +130,6 @@ color: antiquewhite;
 .boxOpen::after,
 .boxMatch::after {
   transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-
 }
 
 .boxMatch {
